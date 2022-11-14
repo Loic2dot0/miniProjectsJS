@@ -1,0 +1,144 @@
+:root{
+    font-size: 100%;
+}
+
+*,
+::before,
+:after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(249, 235, 171);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+main{
+    width: 98%;
+    max-width: 980px;
+    margin: auto;
+}
+
+h1{
+    text-align: center;
+    font-weight: 600;
+    margin: 2rem auto;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    font-weight: bold;
+    line-height: 2rem;
+}
+
+input{
+    margin-bottom: 1rem;
+    border: none;
+    line-height: 2rem;
+    font-size: 1rem;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+button{
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.buttons-group{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.buttons-group button{
+    margin: 0 1rem;
+    padding: 0.5rem;
+    min-width: 130px;
+    background-color: #f3ac60;
+    color: #6c4534;
+    font-weight: 600;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    transition: all 400ms;
+}
+
+.buttons-group button:hover{
+    color: #f3ac60;
+    background-color: #6c4534;
+}
+
+.cookies-list{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+.cookie-card{
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.cookie-card span{
+    font-weight: 600;
+}
+
+.cookie-card button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+    aspect-ratio: 1/1;
+    background-color: #842029;
+    color: #fff;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    transition: transform 400ms;
+}
+
+.cookie-card button:hover{
+    transform: scale(1.05);
+}
+.toast-container{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.toast-container p{
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    min-width: 150px;
+}
+
+.toast-create{
+    color: #0f5132;
+    background-color: #d1e7dd;
+}
+
+.toast-delete{
+    color: #842029;
+    background-color: #f8d7da;
+}
+
+@media screen and (min-width: 1024px){
+    :root{
+        font-size: 125%;
+    }
+
+    .cookies-list{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
