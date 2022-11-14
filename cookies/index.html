@@ -8,7 +8,33 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    
+    <main>
+        <h1>🍪 Gestion de Cookies 🍪</h1>
+
+        <form>
+            <label for="cookie-name">Nom du cookie</label>
+            <input type="text" id="cookie-name" name="cookie-name" required>
+            <label for="cookie-value">valuer du cookie</label>
+            <input type="text" id="cookie-value" name="cookie-value"required>
+            <div class="buttons-group">
+                <button type="submit" id="btn-create">Créer</button>
+                <button type="button" id="btn-display">Afficher</button>
+            </div>
+        </form>
+
+        <div class="cookies-list">
+            <div class="cookie-card">
+                <p><span>Nom :</span> {{name}}</p>
+                <p><span>Valeur :</span> {{value}}</p>
+                <button>X</button>
+            </div>
+        </div>
+
+        <div class="toast-container">
+            <p class="toast-create">Nouveau cookie</p>
+            <p class="toast-delete">Cookie supprimé</p>
+        </div>
+    </main>
     <script src="js/app.js"></script>
 </body>
 </html>
