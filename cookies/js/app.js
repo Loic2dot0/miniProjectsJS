@@ -23,7 +23,12 @@ function handleForm(e){
 
     if(validInputs.includes(false)) return;
 
-    console.log(newCookie);
+    newCookie.expires = new Date(Date.now() + 24*60*60*1000);  //expire dans 24h
+
+    createCookie(newCookie);
+    FORM.reset();
 }
 
-console.log(document.cookie);
+function createCookie(cookie){
+    document.cookie = `${encodeURIComponent(cookie.name)}=${encodeURIComponent(cookie.value)};expires=${cookie.expires}`;
+}
