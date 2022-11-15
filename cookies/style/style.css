@@ -19,6 +19,7 @@ main{
     width: 98%;
     max-width: 980px;
     margin: auto;
+    margin-bottom: 2rem;
 }
 
 h1{
@@ -38,6 +39,7 @@ label{
 }
 
 input{
+    padding: 0 0.5rem;
     margin-bottom: 1rem;
     border: none;
     line-height: 2rem;
@@ -86,6 +88,7 @@ button{
     border-radius: 5px;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
     position: relative;
+    word-break: break-all;    
 }
 
 .cookie-card span{
@@ -109,6 +112,7 @@ button{
 .cookie-card button:hover{
     transform: scale(1.05);
 }
+
 .toast-container{
     position: fixed;
     bottom: 1rem;
@@ -123,14 +127,10 @@ button{
     min-width: 150px;
 }
 
-.toast-create{
-    color: #0f5132;
-    background-color: #d1e7dd;
-}
-
-.toast-delete{
-    color: #842029;
-    background-color: #f8d7da;
+@media screen and (min-width: 768px){
+    .cookies-list{
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media screen and (min-width: 1024px){
