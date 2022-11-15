@@ -32,3 +32,11 @@ function handleForm(e){
 function createCookie(cookie){
     document.cookie = `${encodeURIComponent(cookie.name)}=${encodeURIComponent(cookie.value)};expires=${cookie.expires}`;
 }
+
+function doesCookieExist(cookieName){
+    if(document.cookie == '') return false;
+
+    let cookies = document.cookie.split('; ');
+    let cookiesNames = cookies.map(cookie => cookie.split('=')[0]);
+    return cookiesNames.includes(encodeURIComponent(cookieName));
+}
