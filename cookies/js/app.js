@@ -2,7 +2,7 @@ const FORM = document.forms[0];
 const INPUTS = document.querySelectorAll('input');
 const COOKIES_LIST = document.querySelector('.cookies-list');
 const TOAST_CONTAINER = document.querySelector('.toast-container');
-let isCookiesDisplay = false;
+let isCookiesDisplay = true;
 
 FORM.addEventListener('submit', handleForm);
 
@@ -74,7 +74,7 @@ function createToast({cookieName, state}){ //state : 'create', 'modify', 'delete
     toast.style.color = TOAST_STATES[state].color;
     TOAST_CONTAINER.appendChild(toast);
     setTimeout(()=>{
-        TOAST_CONTAINER.removeChild(toast)
+        TOAST_CONTAINER.removeChild(toast);
     }, 2000);
 }
 
@@ -88,6 +88,25 @@ function displayCookiesList(){
     }
     else {
         let cookiesList = document.cookie.split(';').reverse();
-        createCookiecard(cookiesList);
+        createCookieCard(cookiesList);
     };
+}
+
+function createCookieCard(cookiesList){
+    cookiesList.forEach(cookie => {
+        let cookieCard = document.createElement('div');
+        cookieCard.classList.add('cookie-card');
+        cookieCard.innerHTML = `
+            <p><span>Nom :</span> ${decodeURIComponent(cookie.split('=')[0])}</p>
+            <p><span>Valeur :</span> ${decodeURIComponent(cookie.split('=')[1])}</p>
+            <button>X</button>`;
+        
+        cookieCard.querySelector('button').addEventListener('click', e =>{
+            document.cookie = `${cookie.split('=')[0]}=;expires=${new Date(0)}`;
+            e.target.parentElement.remove();
+            createToast({cookieName : decodeURIComponent(cookie.split('=')[0]), state : 'delete'});
+        });
+
+        COOKIES_LIST.appendChild(cookieCard);
+    });
 }
