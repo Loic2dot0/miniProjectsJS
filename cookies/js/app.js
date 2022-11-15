@@ -6,7 +6,7 @@ const TOAST_CONTAINER = document.querySelector('.toast-container');
 let isCookiesDisplay = false;
 
 FORM.addEventListener('submit', handleForm);
-BTN_DISPLAY.addEventListener('click', toggleDisplay)
+BTN_DISPLAY.addEventListener('click', toggleDisplay);
 
 function handleForm(e){
     e.preventDefault();
@@ -46,7 +46,7 @@ function createCookie(cookie){
 function doesCookieExist(cookieName){
     if(document.cookie == '') return false;
 
-    let cookies = document.cookie.split(';');
+    let cookies = document.cookie.split('; ');
     let cookiesNames = cookies.map(cookie => cookie.split('=')[0]);
     return cookiesNames.includes(encodeURIComponent(cookieName));
 }
@@ -89,7 +89,7 @@ function displayCookiesList(){
         COOKIES_LIST.textContent = "Il n'y a aucun cookie à afficher.";
     }
     else {
-        let cookiesList = document.cookie.split(';').reverse();
+        let cookiesList = document.cookie.split('; ').reverse();
         createCookieCard(cookiesList);
     };
 }
