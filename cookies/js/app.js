@@ -1,10 +1,12 @@
 const FORM = document.forms[0];
+const BTN_DISPLAY = document.getElementById('btn-display');
 const INPUTS = document.querySelectorAll('input');
 const COOKIES_LIST = document.querySelector('.cookies-list');
 const TOAST_CONTAINER = document.querySelector('.toast-container');
-let isCookiesDisplay = true;
+let isCookiesDisplay = false;
 
 FORM.addEventListener('submit', handleForm);
+BTN_DISPLAY.addEventListener('click', toggleDisplay)
 
 function handleForm(e){
     e.preventDefault();
@@ -105,8 +107,15 @@ function createCookieCard(cookiesList){
             document.cookie = `${cookie.split('=')[0]}=;expires=${new Date(0)}`;
             e.target.parentElement.remove();
             createToast({cookieName : decodeURIComponent(cookie.split('=')[0]), state : 'delete'});
+            displayCookiesList();
         });
 
         COOKIES_LIST.appendChild(cookieCard);
     });
+}
+
+function toggleDisplay(e){
+    isCookiesDisplay = !isCookiesDisplay;
+    isCookiesDisplay ? e.target.textContent = 'Masquer' : e.target.textContent = 'Afficher';
+    displayCookiesList();
 }
