@@ -2,6 +2,7 @@ const FORM = document.forms[0];
 const INPUTS = document.querySelectorAll('input');
 const COOKIES_LIST = document.querySelector('.cookies-list');
 const TOAST_CONTAINER = document.querySelector('.toast-container');
+let isCookiesDisplay = false;
 
 FORM.addEventListener('submit', handleForm);
 
@@ -27,6 +28,7 @@ function handleForm(e){
     newCookie.expires = new Date(Date.now() + 24*60*60*1000);  //expire dans 24h
 
     createCookie(newCookie);
+    displayCookiesList();
     FORM.reset();
 }
 
@@ -42,7 +44,7 @@ function createCookie(cookie){
 function doesCookieExist(cookieName){
     if(document.cookie == '') return false;
 
-    let cookies = document.cookie.split('; ');
+    let cookies = document.cookie.split(';');
     let cookiesNames = cookies.map(cookie => cookie.split('=')[0]);
     return cookiesNames.includes(encodeURIComponent(cookieName));
 }
@@ -74,4 +76,18 @@ function createToast({cookieName, state}){ //state : 'create', 'modify', 'delete
     setTimeout(()=>{
         TOAST_CONTAINER.removeChild(toast)
     }, 2000);
+}
+
+function displayCookiesList(){
+    COOKIES_LIST.textContent = '';
+
+    if(!isCookiesDisplay) return;
+
+    if(document.cookie == '') {
+        COOKIES_LIST.textContent = "Il n'y a aucun cookie à afficher.";
+    }
+    else {
+        let cookiesList = document.cookie.split(';').reverse();
+        createCookiecard(cookiesList);
+    };
 }
