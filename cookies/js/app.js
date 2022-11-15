@@ -1,6 +1,7 @@
 const FORM = document.forms[0];
 const INPUTS = document.querySelectorAll('input');
 const COOKIES_LIST = document.querySelector('.cookies-list');
+const TOAST_CONTAINER = document.querySelector('.toast-container');
 
 FORM.addEventListener('submit', handleForm);
 
@@ -30,6 +31,11 @@ function handleForm(e){
 }
 
 function createCookie(cookie){
+    if(doesCookieExist(cookie.name)){
+        createToast({cookieName : cookie.name, state : 'modify'});
+    } else{
+        createToast({cookieName : cookie.name, state : 'create'});
+    }
     document.cookie = `${encodeURIComponent(cookie.name)}=${encodeURIComponent(cookie.value)};expires=${cookie.expires}`;
 }
 
@@ -39,4 +45,33 @@ function doesCookieExist(cookieName){
     let cookies = document.cookie.split('; ');
     let cookiesNames = cookies.map(cookie => cookie.split('=')[0]);
     return cookiesNames.includes(encodeURIComponent(cookieName));
+}
+
+function createToast({cookieName, state}){ //state : 'create', 'modify', 'delete'
+    let toast = document.createElement('p');
+    const TOAST_STATES = {
+        create: {
+            value: 'créé',
+            backgroundColor: '#d1e7dd',
+            color: '#0f5132'
+        },
+        modify: {
+            value: 'modifié',
+            backgroundColor: '#fff3cd',
+            color: '#664d03'
+        },
+        delete: {
+            value: 'supprimé',
+            backgroundColor: '#f8d7da',
+            color: '#842029'
+        }
+    }
+
+    toast.textContent = `Cookie ${cookieName} ${TOAST_STATES[state].value}.`;
+    toast.style.backgroundColor = TOAST_STATES[state].backgroundColor;
+    toast.style.color = TOAST_STATES[state].color;
+    TOAST_CONTAINER.appendChild(toast);
+    setTimeout(()=>{
+        TOAST_CONTAINER.removeChild(toast)
+    }, 2000);
 }
