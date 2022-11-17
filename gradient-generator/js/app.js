@@ -49,6 +49,11 @@ function updateTextColorLabel(backgroundColor){
 }
 
 function getRandomGradient(){
+    GRADIENT.colors.forEach((color, index) => {
+        GRADIENT.colors[index] = getRandomColor();
+        COLOR_INPUTS[index].value = GRADIENT.colors[index];
+    });
+
     GRADIENT.orientation = getRandomNumber(0, 360);
     ORIENTATION_INPUT.value = GRADIENT.orientation;
     applyGradient();
@@ -59,8 +64,9 @@ function getRandomNumber(min, max){
 }
 
 function getRandomColor(){
-    let red = getRandomNumber(0, 255).toString(16);
-    let green = getRandomNumber(0, 255).toString(16);
-    let blue = getRandomNumber(0, 255).toString(16);
-    return '#' + red + green + blue;
+    let color = getRandomNumber(0, 16777215).toString(16);
+    while(color.length < 6){
+        color = '0' + color;
+    }
+    return '#' + color;
 }
