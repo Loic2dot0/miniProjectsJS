@@ -9,14 +9,19 @@ const GRADIENT = {
 COLOR_INPUTS.forEach(input => input.addEventListener('input', handleInputColor));
 
 function handleInputColor(e){
-    console.log(e.target.value);
-    console.log(e.target);
     let colorIndex = COLOR_INPUTS.indexOf(e.target);
     GRADIENT.colors[colorIndex] = e.target.value;
-    
     applyGradient();
 }
 
 function applyGradient(){
+    modifyLabels();
     document.body.style.background = `linear-gradient(${GRADIENT.orientation}deg, ${GRADIENT.colors[0]}, ${GRADIENT.colors[1]})`;
+}
+
+function modifyLabels(){
+    COLOR_LABELS.forEach((label, index) => {
+        label.style.backgroundColor = GRADIENT.colors[index];
+        label.textContent = GRADIENT.colors[index];
+    });
 }
