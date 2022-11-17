@@ -57,3 +57,10 @@ function getRandomGradient(){
 function getRandomNumber(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function getRandomColor(){
+    let red = getRandomNumber(0, 255).toString(16);
+    let green = getRandomNumber(0, 255).toString(16);
+    let blue = getRandomNumber(0, 255).toString(16);
+    return '#' + red + green + blue;
+}
