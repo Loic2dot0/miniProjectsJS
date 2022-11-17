@@ -1,6 +1,8 @@
 const COLOR_LABELS = [...document.querySelectorAll('.input-group label')];
 const COLOR_INPUTS = [...document.querySelectorAll('.input-group input')];
 const ORIENTATION_INPUT = document.getElementById('orientation');
+const BTN_COPY = document.querySelector('.btn-copy');
+const BTN_RANDOM = document.querySelector('.btn-random');
 
 const GRADIENT = {
     orientation: 90,
@@ -11,6 +13,7 @@ applyGradient();
 
 COLOR_INPUTS.forEach(input => input.addEventListener('input', handleInputColor));
 ORIENTATION_INPUT.addEventListener('input', handleOrientationInput);
+BTN_RANDOM.addEventListener('click', getRandomGradient);
 
 function handleInputColor(e){
     let colorIndex = COLOR_INPUTS.indexOf(e.target);
@@ -43,4 +46,14 @@ function updateTextColorLabel(backgroundColor){
     let blue = parseInt(backgroundColor.slice(5,7), 16);
    
     return (red + green + blue) / 3 < 128 ? '#fff' : '#000';
+}
+
+function getRandomGradient(){
+    GRADIENT.orientation = getRandomNumber(0, 360);
+    ORIENTATION_INPUT.value = GRADIENT.orientation;
+    applyGradient();
+}
+
+function getRandomNumber(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
