@@ -9,3 +9,111 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: aquamarine;
+}
+
+main{
+    width: 100%;
+    max-width: 600px;
+    padding: 1rem;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.input-group{
+    position: relative;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    border: solid 3px #fff;   
+    overflow: hidden; 
+}
+
+.input-group label{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.input-group input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.range-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.range-group label{
+    font-size: 1.2rem;
+}
+
+.button-group{
+    display: flex;
+    justify-content: space-around;
+}
+
+button{
+    padding: 0.5rem 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.2rem;
+    min-width: 150px;
+    transition: background-color 400ms;
+    position: relative;
+}
+
+button:hover{
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.btn-copy::before{
+    display: block;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    content: "✅ copié !";
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.btn-copy.active::before{
+    animation: slide-out 1000ms linear both;
+}
+
+@keyframes slide-out {
+    0%{
+        opacity: 1;
+    }
+    30%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-150%);
+    }
+}
