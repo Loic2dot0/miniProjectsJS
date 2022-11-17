@@ -7,6 +7,8 @@ const GRADIENT = {
     colors: ['#00f6fa', '#fdff8f']
 }
 
+applyGradient();
+
 COLOR_INPUTS.forEach(input => input.addEventListener('input', handleInputColor));
 ORIENTATION_INPUT.addEventListener('input', handleOrientationInput);
 
@@ -27,11 +29,11 @@ function modifyLabels(){
         label.textContent = GRADIENT.colors[index];
         label.style.color = updateTextColorLabel(GRADIENT.colors[index]);
     });
+    document.querySelector('.range-group label').textContent = `Orientation : ${GRADIENT.orientation}°`;
 }
 
 function handleOrientationInput(e){
     GRADIENT.orientation = e.target.value;
-    document.querySelector('.range-group label').textContent = `Orientation : ${GRADIENT.orientation}°`;
     applyGradient();
 }
 
