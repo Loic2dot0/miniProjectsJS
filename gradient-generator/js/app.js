@@ -9,11 +9,12 @@ const GRADIENT = {
     colors: ['#00f6fa', '#fdff8f']
 }
 
-applyGradient();
+getRandomGradient();
 
 COLOR_INPUTS.forEach(input => input.addEventListener('input', handleInputColor));
 ORIENTATION_INPUT.addEventListener('input', handleOrientationInput);
 BTN_RANDOM.addEventListener('click', getRandomGradient);
+BTN_COPY.addEventListener('click', copyToClipboard);
 
 function handleInputColor(e){
     let colorIndex = COLOR_INPUTS.indexOf(e.target);
@@ -69,4 +70,31 @@ function getRandomColor(){
         color = '0' + color;
     }
     return '#' + color;
+}
+
+let lockCopy = false;
+
+function copyToClipboard(){
+    if(!navigator.clipboard){
+        alert('Désolé mais votre navigateur ne supporte pas l\'API clipboard');
+        return;
+    }
+
+    if(lockCopy) return;
+
+    lockCopy = true;
+    let gradient = `linear-gradient(${GRADIENT.orientation}deg, ${GRADIENT.colors[0]}, ${GRADIENT.colors[1]})`;
+
+    navigator.clipboard.writeText(gradient).then(
+        () =>{
+            BTN_COPY.classList.add('active');
+            setTimeout(()=>{
+                BTN_COPY.classList.remove('active');
+                lockCopy = false;
+            }, 1000);
+        },
+        ()=>{
+            alert('Le texte n\'a pas pu être copié dans le presse-papiers');
+        }
+    );
 }
