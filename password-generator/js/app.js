@@ -19,6 +19,7 @@ createPassword();
 
 document.forms[0].addEventListener('submit', handleSubmit);
 INPUT_RANGE.addEventListener('input', handleRange);
+BTN_COPY.addEventListener('click', copyToClipboard);
 
 function handleSubmit(e){
     e.preventDefault();
@@ -81,3 +82,28 @@ function getRandomNumber(min, max){
     randomNumber = randomNumber / 4294967296;
     return Math.floor(randomNumber * (max - min +1)) + min;
 };
+
+let lockCopy = false;
+
+function copyToClipboard(){
+    if(!navigator.clipboard){
+        alert('Désolé mais votre navigateur ne supporte pas l\'API clipboard');
+        return;
+    }
+
+    if(lockCopy) return;
+
+    lockCopy = true;    
+    navigator.clipboard.writeText(PASSWORD.textContent).then(
+        () =>{
+            BTN_COPY.classList.add('active');
+            setTimeout(()=>{
+                BTN_COPY.classList.remove('active');
+                lockCopy = false;
+            }, 1200);
+        },
+        ()=>{
+            alert('Le texte n\'a pas pu être copié dans le presse-papiers');
+        }
+    );
+}
