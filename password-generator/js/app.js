@@ -31,6 +31,18 @@ function createPassword(){
         MESSAGE.textContent = 'Vous devez cocher au minimum 1 case.';
         return;
     }
+
+    let passwordBase = [];
+    INPUT_CHECKBOX.forEach((input, index) => {
+        if(input.checked) passwordBase.push(CHARACTERS_SET[index][getRandomNumber(0, CHARACTERS_SET[index].length - 1)]);
+    });
+    
+    let password = '';
+    let passwordLength = INPUT_RANGE.value;
+    
+    for(let i = passwordBase.length + 1; i<= passwordLength; i++){
+        password += concatenatedCharactersSet[getRandomNumber(0, concatenatedCharactersSet.length - 1)];
+    }
 }
 
 function checkedCharactersSet(){
@@ -42,3 +54,9 @@ function checkedCharactersSet(){
     
     return concatenatedCharactersSet;
 }
+
+function getRandomNumber(min, max){
+    let randomNumber = crypto.getRandomValues(new Uint32Array(1))[0];
+    randomNumber = randomNumber / 4294967296;
+    return Math.floor(randomNumber * (max - min +1)) + min;
+};
