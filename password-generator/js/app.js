@@ -1,5 +1,6 @@
 const PASSWORD = document.querySelector('.password');
 const RANGE_DISPLAY = document.querySelector('.range-group label');
+const MESSAGE = document.querySelector('.message');
 const INPUT_RANGE =  document.querySelector('input[type="range"]');
 const INPUT_CHECKBOX = [...document.querySelectorAll('input[type="checkbox"')];
 const BTN_COPY = document.querySelector('.btn-copy');
@@ -20,4 +21,24 @@ function addCharactersSet(fromCode, toCode){
         charactersList += String.fromCharCode(i);
     }
     return charactersList;
+}
+
+function createPassword(){
+    MESSAGE.textContent = ''
+    let concatenatedCharactersSet = checkedCharactersSet();
+
+    if(concatenatedCharactersSet.length == 0) {
+        MESSAGE.textContent = 'Vous devez cocher au minimum 1 case.';
+        return;
+    }
+}
+
+function checkedCharactersSet(){
+    let concatenatedCharactersSet = '';
+    
+    INPUT_CHECKBOX.forEach((input, index) => {
+        if(input.checked) concatenatedCharactersSet += CHARACTERS_SET[index];
+    })
+    
+    return concatenatedCharactersSet;
 }
