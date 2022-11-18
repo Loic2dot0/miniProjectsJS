@@ -15,6 +15,20 @@ const CHARACTERS_SET = [
     addCharactersSet(33, 47) + addCharactersSet(58, 64) + addCharactersSet(91, 96) + addCharactersSet(123, 126)
 ];
 
+createPassword();
+
+document.forms[0].addEventListener('submit', handleSubmit);
+INPUT_RANGE.addEventListener('input', handleRange);
+
+function handleSubmit(e){
+    e.preventDefault();
+    createPassword();
+}
+
+function handleRange(e){
+    RANGE_DISPLAY.textContent = `Taille du mot de passe : ${e.target.value}`;
+}
+
 function addCharactersSet(fromCode, toCode){
     let charactersList = '';
     for(let i= fromCode; i <= toCode; i++){
