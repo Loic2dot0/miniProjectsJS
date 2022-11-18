@@ -132,6 +132,13 @@ input[type="checkbox"]{
     color: #000;
 }
 
+.message{
+    margin-top: 1rem;
+    text-align: center;
+    color: crimson;
+    font-size: 1.2rem;
+}
+
 @keyframes slide-out {
     0%{
         opacity: 1;
