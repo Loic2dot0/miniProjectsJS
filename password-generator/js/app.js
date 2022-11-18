@@ -36,13 +36,20 @@ function createPassword(){
     INPUT_CHECKBOX.forEach((input, index) => {
         if(input.checked) passwordBase.push(CHARACTERS_SET[index][getRandomNumber(0, CHARACTERS_SET[index].length - 1)]);
     });
-    
+
     let password = '';
     let passwordLength = INPUT_RANGE.value;
     
     for(let i = passwordBase.length + 1; i<= passwordLength; i++){
         password += concatenatedCharactersSet[getRandomNumber(0, concatenatedCharactersSet.length - 1)];
     }
+    
+    passwordBase.forEach((item, index)=>{
+        let randomIndex = getRandomNumber(0, password.length - 1);
+        password = password.slice(0 , randomIndex) + passwordBase[index] + password.slice(randomIndex);
+    });
+
+    PASSWORD.textContent = password;
 }
 
 function checkedCharactersSet(){
