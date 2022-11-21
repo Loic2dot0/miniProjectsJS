@@ -17,6 +17,7 @@ const CONTROLS = {
 
 VIDEO.addEventListener('loadeddata', displayDurationTime);
 BTN.play.addEventListener('click', onClickPlay);
+VIDEO.addEventListener('click', onClickPlay);
 
 function displayDurationTime(){
     TIME.duration.textContent = convertSecondesToHHMMSS(VIDEO.duration);
@@ -38,7 +39,7 @@ function onClickPlay(){
     if(CONTROLS.isPlay){
         VIDEO.play()
             .then(()=>{
-                console.log('lecture en cours');
+                togglePlayIcon();
             })
             .catch(err =>{
                 console.log(err);
@@ -46,6 +47,14 @@ function onClickPlay(){
             });
     } else{
         VIDEO.pause();
-        console.log('lecture en pause');
+        togglePlayIcon();
+    }
+}
+
+function togglePlayIcon(){
+    if(CONTROLS.isPlay){
+        document.querySelector('.btn-play img').setAttribute('src', 'assets/pause.svg');
+    } else{
+        document.querySelector('.btn-play img').setAttribute('src', 'assets/play.svg');
     }
 }
