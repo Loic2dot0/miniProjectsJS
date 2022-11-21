@@ -8,7 +8,28 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    
+    <main>
+        <h1>Lecteur vidéo personnalisé</h1>
+
+        <div class="video-container">
+            <video src="media/video.mp4"></video>
+            <div class="video-controls">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="controls-buttons">
+                    <button class="btn-play"><img src="assets/play.svg" alt="icone lecture"></button>
+                    <button class="btn-mute"><img src="assets/unmute.svg" alt="icone volume"></button>
+                    <input type="range" class="range-volume" min="0" max="100" value="100">
+                    <div class="video-time">
+                        <span class="current-time">0:00</span> /
+                        <span class="duration-time">0:00</span>
+                    </div>
+                    <button class="btn-fullscreen"><img src="assets/fullscreen.svg" alt="icone plein écran"></button>
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="js/app.js"></script>
 </body>
 </html>
