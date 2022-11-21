@@ -1,0 +1,109 @@
+:root{
+    font-size: 100%;
+}
+
+*,
+::before,
+::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #f2e39c;
+    min-height: 100vh;
+    padding-top: clamp(10px, 5vh, 50px);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+main{
+    width: 98%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1{
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.video-container{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container:hover .video-controls{
+    transform: translateY(0);
+}
+
+video{
+    width: 100%;
+    cursor: pointer;
+}
+
+.video-controls{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #000;
+    color: #fff;
+    font-size: 1.2rem;
+    width: 100%;
+    transform: translateY(calc(100% - 0.5rem));
+    transition: transform 400ms;
+}
+
+.progress-bar{
+    width: 100%;
+    height: 0.5rem;
+    cursor: pointer;
+}
+
+.progress{
+    height: 100%;
+    width: 50%;
+    background-color: red;
+}
+
+.controls-buttons{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.controls-buttons > * {
+    margin-right: 0.5rem;
+}
+
+button{
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button:hover{
+    background-color: #444;
+}
+
+button img{
+    width: 60%;
+    pointer-events: none;
+}
+
+button:last-child{
+    margin-right: 0;
+}
+
+.video-time{
+    flex: 1;
+    padding-left: 1rem;
+}
