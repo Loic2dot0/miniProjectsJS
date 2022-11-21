@@ -16,6 +16,7 @@ const CONTROLS = {
 };
 
 VIDEO.addEventListener('loadeddata', displayDurationTime);
+BTN.play.addEventListener('click', onClickPlay);
 
 function displayDurationTime(){
     TIME.duration.textContent = convertSecondesToHHMMSS(VIDEO.duration);
@@ -29,4 +30,22 @@ function convertSecondesToHHMMSS(timeInSecondes){
     if(minutes < 10) minutes = `0${minutes}`;
     if(secondes < 10) secondes = `0${secondes}`;
     return hours == 0 ? `${minutes}:${secondes}` : `${hours}:${minutes}:${secondes}`;
+}
+
+function onClickPlay(){
+    CONTROLS.isPlay = !CONTROLS.isPlay;
+
+    if(CONTROLS.isPlay){
+        VIDEO.play()
+            .then(()=>{
+                console.log('lecture en cours');
+            })
+            .catch(err =>{
+                console.log(err);
+                alert('Une erreur de lecture est survenue');
+            });
+    } else{
+        VIDEO.pause();
+        console.log('lecture en pause');
+    }
 }
