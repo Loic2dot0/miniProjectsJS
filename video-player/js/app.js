@@ -19,6 +19,7 @@ VIDEO.addEventListener('loadeddata', displayDurationTime);
 VIDEO.addEventListener('click', onClickPlay);
 BTN.play.addEventListener('click', onClickPlay);
 BTN.mute.addEventListener('click', onClickMute);
+BTN.volume.addEventListener('input', setVolume);
 
 function displayDurationTime(){
     TIME.duration.textContent = convertSecondesToHHMMSS(VIDEO.duration);
@@ -72,4 +73,11 @@ function toggleMuteIcon(){
     } else{
         document.querySelector('.btn-mute img').setAttribute('src', 'assets/unmute.svg');
     }
+}
+
+function setVolume(){
+    VIDEO.volume = BTN.volume.value / 100;
+    console.log(VIDEO.volume);
+    CONTROLS.isMute = VIDEO.volume == 0 ? false : true;
+    onClickMute();
 }
