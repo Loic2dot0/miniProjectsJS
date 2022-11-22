@@ -39,6 +39,14 @@ h1{
     transform: translateY(0);
 }
 
+.video-container.hidden video{
+    cursor: none;
+}
+
+.video-container.hidden .video-controls{
+    transform: translateY(calc(100% - 0.5rem));
+}
+
 video{
     width: 100%;
     cursor: pointer;
@@ -64,7 +72,7 @@ video{
 
 .progress{
     height: 100%;
-    width: 50%;
+    width: 0%;
     background-color: red;
     transition: width 400ms;
 }
