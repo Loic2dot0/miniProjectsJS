@@ -13,6 +13,7 @@ const CONTROLS = {
     isPlay: false,
     isMute: false,
 };
+const PROGRESS = document.querySelector('.progress');
 
 VIDEO.addEventListener('loadeddata', displayDurationTime);
 VIDEO.addEventListener('click', onClickPlay);
@@ -21,6 +22,7 @@ BTN.play.addEventListener('click', onClickPlay);
 BTN.mute.addEventListener('click', onClickMute);
 BTN.volume.addEventListener('input', setVolume);
 BTN.fullscreen.addEventListener('click', onClickFullscreen);
+VIDEO.addEventListener('timeupdate', updateCurrentTime);
 
 function displayDurationTime(){
     TIME.duration.textContent = convertSecondesToHHMMSS(VIDEO.duration);
@@ -89,4 +91,9 @@ function onClickFullscreen(){
     } else {
         document.querySelector('.video-container').requestFullscreen();
     }
+};
+
+function updateCurrentTime(){
+    TIME.current.textContent = convertSecondesToHHMMSS(VIDEO.currentTime);
+    PROGRESS.style.width = `${VIDEO.currentTime * 100 / VIDEO.duration}%`;
 }
