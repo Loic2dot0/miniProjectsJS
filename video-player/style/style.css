@@ -35,7 +35,8 @@ h1{
     overflow: hidden;
 }
 
-.video-container:hover .video-controls{
+.video-container:hover .video-controls,
+.video-controls.active{
     transform: translateY(0);
 }
 

@@ -15,7 +15,7 @@ const CONTROLS = {
 };
 const PROGRESS_BAR = document.querySelector('.progress-bar');
 
-VIDEO.addEventListener('loadeddata', displayDurationTime);
+VIDEO.addEventListener('loadeddata', initVideo);
 VIDEO.addEventListener('click', onClickPlay);
 VIDEO.addEventListener('dblclick', onClickFullscreen);
 BTN.play.addEventListener('click', onClickPlay);
@@ -24,6 +24,15 @@ BTN.volume.addEventListener('input', setVolume);
 BTN.fullscreen.addEventListener('click', onClickFullscreen);
 VIDEO.addEventListener('timeupdate', updateCurrentTime);
 PROGRESS_BAR.addEventListener('click', videoNavigation);
+
+function initVideo(){
+    displayDurationTime();
+    setVolume();
+    document.querySelector('.video-controls').classList.add('active');
+    setTimeout(()=>{
+        document.querySelector('.video-controls').classList.remove('active');
+    }, 1500)
+}
 
 function displayDurationTime(){
     TIME.duration.textContent = convertSecondesToHHMMSS(VIDEO.duration);
