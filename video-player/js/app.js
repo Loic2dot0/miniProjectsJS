@@ -13,7 +13,7 @@ const CONTROLS = {
     isPlay: false,
     isMute: false,
 };
-const PROGRESS = document.querySelector('.progress');
+const PROGRESS_BAR = document.querySelector('.progress-bar');
 
 VIDEO.addEventListener('loadeddata', displayDurationTime);
 VIDEO.addEventListener('click', onClickPlay);
@@ -23,6 +23,7 @@ BTN.mute.addEventListener('click', onClickMute);
 BTN.volume.addEventListener('input', setVolume);
 BTN.fullscreen.addEventListener('click', onClickFullscreen);
 VIDEO.addEventListener('timeupdate', updateCurrentTime);
+PROGRESS_BAR.addEventListener('click', videoNavigation);
 
 function displayDurationTime(){
     TIME.duration.textContent = convertSecondesToHHMMSS(VIDEO.duration);
@@ -95,5 +96,12 @@ function onClickFullscreen(){
 
 function updateCurrentTime(){
     TIME.current.textContent = convertSecondesToHHMMSS(VIDEO.currentTime);
-    PROGRESS.style.width = `${VIDEO.currentTime * 100 / VIDEO.duration}%`;
+    document.querySelector('.progress').style.width = `${VIDEO.currentTime * 100 / VIDEO.duration}%`;
+}
+
+function videoNavigation(e){
+    let rect = PROGRESS_BAR.getBoundingClientRect();
+    let progress = (e.clientX - rect.left) / rect.width;
+    VIDEO.currentTime = VIDEO.duration * progress;
+    updateCurrentTime();
 }
