@@ -89,8 +89,13 @@ function setVolume(){
 function onClickFullscreen(){
     if(document.fullscreenElement){
         document.exitFullscreen();
+        document.querySelector('.video-container').classList.remove('hidden');
+        window.removeEventListener('mousemove', displayControls);
+                
     } else {
         document.querySelector('.video-container').requestFullscreen();
+        document.querySelector('.video-container').classList.add('hidden');
+        window.addEventListener('mousemove', displayControls);
     }
 };
 
@@ -104,4 +109,17 @@ function videoNavigation(e){
     let progress = (e.clientX - rect.left) / rect.width;
     VIDEO.currentTime = VIDEO.duration * progress;
     updateCurrentTime();
+}
+
+let lock = false;
+
+function displayControls(){
+    if(lock) return;
+    lock = true;
+    document.querySelector('.video-container').classList.remove('hidden');
+    
+    setTimeout(()=>{
+        document.fullscreenElement && document.querySelector('.video-container').classList.add('hidden');
+        lock = false;
+    }, 2500)
 }
