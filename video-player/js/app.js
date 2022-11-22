@@ -12,14 +12,15 @@ const TIME = {
 const CONTROLS = {
     isPlay: false,
     isMute: false,
-    isFullscreen: false
 };
 
 VIDEO.addEventListener('loadeddata', displayDurationTime);
 VIDEO.addEventListener('click', onClickPlay);
+VIDEO.addEventListener('dblclick', onClickFullscreen);
 BTN.play.addEventListener('click', onClickPlay);
 BTN.mute.addEventListener('click', onClickMute);
 BTN.volume.addEventListener('input', setVolume);
+BTN.fullscreen.addEventListener('click', onClickFullscreen);
 
 function displayDurationTime(){
     TIME.duration.textContent = convertSecondesToHHMMSS(VIDEO.duration);
@@ -80,4 +81,12 @@ function setVolume(){
     console.log(VIDEO.volume);
     CONTROLS.isMute = VIDEO.volume == 0 ? false : true;
     onClickMute();
+}
+
+function onClickFullscreen(){
+    if(document.fullscreenElement){
+        document.exitFullscreen();
+    } else {
+        document.querySelector('.video-container').requestFullscreen();
+    }
 }
