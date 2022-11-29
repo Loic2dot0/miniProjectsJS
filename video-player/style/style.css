@@ -55,6 +55,10 @@ video{
     cursor: pointer;
 }
 
+video.fullscreen{
+    max-height: 100%;
+}
+
 .video-controls{
     position: absolute;
     left: 0;

@@ -101,11 +101,13 @@ function onClickFullscreen(){
         document.exitFullscreen();
         document.querySelector('.video-container').classList.remove('hidden');
         window.removeEventListener('mousemove', displayControls);
+        VIDEO.classList.remove('fullscreen');
                 
     } else {
         document.querySelector('.video-container').requestFullscreen();
         document.querySelector('.video-container').classList.add('hidden');
         window.addEventListener('mousemove', displayControls);
+        VIDEO.classList.add('fullscreen');
     }
 };
 
