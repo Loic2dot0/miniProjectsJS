@@ -24,6 +24,7 @@ BTN.volume.addEventListener('input', setVolume);
 BTN.fullscreen.addEventListener('click', onClickFullscreen);
 VIDEO.addEventListener('timeupdate', updateCurrentTime);
 PROGRESS_BAR.addEventListener('click', videoNavigation);
+VIDEO.addEventListener('ended', handleEndedVideo);
 
 function initVideo(){
     displayDurationTime();
@@ -50,6 +51,7 @@ function convertSecondesToHHMMSS(timeInSecondes){
 
 function onClickPlay(){
     CONTROLS.isPlay = !CONTROLS.isPlay;
+    handleEndedVideo();
 
     if(CONTROLS.isPlay){
         VIDEO.play()
@@ -90,7 +92,6 @@ function toggleMuteIcon(){
 
 function setVolume(){
     VIDEO.volume = BTN.volume.value / 100;
-    console.log(VIDEO.volume);
     CONTROLS.isMute = VIDEO.volume == 0 ? false : true;
     onClickMute();
 }
@@ -130,5 +131,18 @@ function displayControls(){
     setTimeout(()=>{
         document.fullscreenElement && document.querySelector('.video-container').classList.add('hidden');
         lock = false;
-    }, 2500)
+    }, 2500);
+}
+
+function handleEndedVideo(e){
+    let videoAction = document.querySelector('.video-action');
+    if(e){
+        videoAction.innerHTML = '<img src="assets/replay.svg" alt="Icone de relecture">';
+        videoAction.classList.add('active');
+        CONTROLS.isPlay = false;
+        togglePlayIcon();
+    } else {
+        videoAction.innerHTML = '';
+        videoAction.classList.remove('active');
+    }
 }
