@@ -8,7 +8,48 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    
+    <main>
+        <audio src=""></audio>
+        <div class="music-cover">
+            <img src="assets/cover-default.png" alt="Pochette de l'album">
+        </div>
+        <div class="info">
+            <div class="music-info">
+                <h1 class="title">No title</h1>
+                <h2 class="artist">No artist</h2>
+            </div>
+            <div class="playlist-info">
+                <span class="playlist-current">0</span>/<span class="playlist-total">0</span>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="controls-time">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="time">
+                    <span class="current-time">0:00</span>
+                    <span class="duration-time">0:00</span>
+                </div>
+            </div>
+            <div class="controls-buttons">
+                <div class="button-group">
+                    <button data-control="shuffle"><img src="assets/shuffle-icon.svg" alt="Icone lecture aléatoire"></button>
+                </div>
+                <div class="button-group">
+                    <button data-control="prev"><img src="assets/prev-icon.svg" alt="Icone piste précédente"></button>
+                    <button data-control="play"><img src="assets/play-icon.svg" alt="Icone lecture"></button>
+                    <button data-control="next"><img src="assets/next-icon.svg" alt="Icone piste suivante"></button>
+                </div>
+                <div class="button-group">
+                    <button data-control="sound-down">-</button>
+                    <button data-control="sound-mute"><img src="assets/unmute.svg" alt="Icone son"></button>
+                    <button data-control="sound-up">+</button>
+                </div>
+            </div>  
+        </div>
+    </main>
+
     <script src="js/app.js"></script>
 </body>
 </html>
