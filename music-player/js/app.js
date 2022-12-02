@@ -35,6 +35,7 @@ const PLAYLIST = {
 window.addEventListener('load', initPlaylist);
 AUDIO.addEventListener('loadeddata', updateDurationTime);
 AUDIO.addEventListener('timeupdate', updateCurrentTime);
+PROGRESS_BAR.addEventListener('click', audioNavigation);
 BUTTONS.forEach(button => button.addEventListener('click', handleButton));
 
 function initPlaylist(){
@@ -129,4 +130,11 @@ function convertSecondesToHHMMSS(timeInSecondes){
     if(minutes < 10) minutes = `0${minutes}`;
     if(secondes < 10) secondes = `0${secondes}`;
     return hours == 0 ? `${minutes}:${secondes}` : `${hours}:${minutes}:${secondes}`;
+}
+
+function audioNavigation(e){
+    let rect = PROGRESS_BAR.getBoundingClientRect();
+    let progress = (e.clientX - rect.left) / rect.width;
+    AUDIO.currentTime = AUDIO.duration * progress;
+    updateCurrentTime();
 }
