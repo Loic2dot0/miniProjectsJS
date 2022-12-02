@@ -37,7 +37,7 @@ function handleButton(e){
             console.log('prev');
             break;
         case 'play':
-            console.log('play');
+            handleButtonPlay();
             break;
         case 'next':
             console.log('next');
@@ -51,5 +51,21 @@ function handleButton(e){
         case 'sound-up':
             console.log('sound-up');
             break;
+    }
+}
+
+function handleButtonPlay(){
+    if(!CONTROLS.isPlay){
+        AUDIO.play()
+            .then(()=>{
+                CONTROLS.isPlay = true;
+            })
+            .catch(err=>{
+                console.log(err);
+                alert('Une erreur de lecture est survenue.')
+            });
+    } else {
+        AUDIO.pause();
+        CONTROLS.isPlay = false;
     }
 }
