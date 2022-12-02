@@ -25,8 +25,18 @@ const CONTROLS = {
     isShuffle: false,
     isMute: false
 };
+const PLAYLIST = {
+    current: 0,
+    total: MUSICS_DATA.length
+}
 
+window.addEventListener('load', initPlaylist);
 BUTTONS.forEach(button => button.addEventListener('click', handleButton));
+
+function initPlaylist(){
+    DISPLAY.playlistTotal.textContent = PLAYLIST.total;
+    openMusicFile(PLAYLIST.current);
+}
 
 function handleButton(e){
     switch(e.target.dataset.control){
@@ -68,4 +78,9 @@ function handleButtonPlay(){
         AUDIO.pause();
         CONTROLS.isPlay = false;
     }
+}
+
+function openMusicFile(track){
+    DISPLAY.playlistCurrent.textContent = track + 1;
+    AUDIO.setAttribute('src', MUSICS_DATA[track].path);
 }
