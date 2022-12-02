@@ -24,8 +24,7 @@ const DISPLAY = {
 };
 const CONTROLS = {
     isPlay: false,
-    isShuffle: false,
-    isMute: false
+    isShuffle: false
 };
 const PLAYLIST = {
     current: 0,
@@ -44,7 +43,8 @@ function initPlaylist(){
 }
 
 function handleButton(e){
-    switch(e.target.dataset.control){
+    let btn = e.target.dataset.control;
+    switch(btn){
         case 'shuffle':
             console.log('shuffle');
             break;
@@ -58,13 +58,13 @@ function handleButton(e){
             console.log('next');
             break;
         case 'sound-down':
-            console.log('sound-down');
+            changeVolume(btn);
             break;
         case 'sound-mute':
-            console.log('sound-mute');
+            changeVolume(btn);
             break;
         case 'sound-up':
-            console.log('sound-up');
+            changeVolume(btn);
             break;
     }
 }
@@ -148,4 +148,33 @@ function audioNavigation(e){
     let progress = (e.clientX - rect.left) / rect.width;
     AUDIO.currentTime = AUDIO.duration * progress;
     updateCurrentTime();
+}
+
+function changeVolume(action){
+    if(action == 'sound-mute'){
+        AUDIO.muted = ! AUDIO.muted;
+    }
+
+    if(action == 'sound-down'){
+        (AUDIO.volume - 0.1).toFixed(1) < 0 ? AUDIO.volume = 0 : AUDIO.volume = (AUDIO.volume - 0.1).toFixed(1);
+        document.querySelector('.sound-bar').style.height = `${AUDIO.volume * 100}%`;
+        AUDIO.volume == 0 ? AUDIO.muted = true : AUDIO.muted = false;
+    }
+
+    if(action == 'sound-up'){
+        (AUDIO.volume + 0.1).toFixed(1) > 1 ? AUDIO.volume = 1 : AUDIO.volume = (AUDIO.volume + 0.1).toFixed(1);
+        document.querySelector('.sound-bar').style.height = `${AUDIO.volume * 100}%`;
+        AUDIO.muted = false;
+    }
+
+    updateIconButtonMute();
+}
+
+function updateIconButtonMute(){
+    let btnIcon = document.querySelector('button[data-control="sound-mute"] img');
+    if(AUDIO.muted){
+        btnIcon.setAttribute('src', 'assets/mute.svg');
+    } else {
+        btnIcon.setAttribute('src', 'assets/unmute.svg');
+    }
 }
