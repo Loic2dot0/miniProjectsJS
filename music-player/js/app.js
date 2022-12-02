@@ -33,6 +33,8 @@ const PLAYLIST = {
 }
 
 window.addEventListener('load', initPlaylist);
+AUDIO.addEventListener('loadeddata', updateDurationTime);
+AUDIO.addEventListener('timeupdate', updateCurrentTime);
 BUTTONS.forEach(button => button.addEventListener('click', handleButton));
 
 function initPlaylist(){
@@ -108,4 +110,23 @@ function updateMusicInfo(filePath){
             DISPLAY.artist.textContent = 'No artist';
         }
     });
+}
+
+function updateDurationTime(){
+    TIME.duration.textContent = convertSecondesToHHMMSS(AUDIO.duration);
+}
+
+function updateCurrentTime(){
+    TIME.current.textContent = convertSecondesToHHMMSS(AUDIO.currentTime);
+    document.querySelector('.progress').style.width = `${AUDIO.currentTime * 100 / AUDIO.duration}%`;
+}
+
+function convertSecondesToHHMMSS(timeInSecondes){
+    let hours = Math.floor(timeInSecondes / 3600);
+    let minutes = Math.floor((timeInSecondes - hours * 3600)/ 60);
+    let secondes = Math.floor(timeInSecondes - hours * 3600 - minutes * 60);
+    
+    if(minutes < 10) minutes = `0${minutes}`;
+    if(secondes < 10) secondes = `0${secondes}`;
+    return hours == 0 ? `${minutes}:${secondes}` : `${hours}:${minutes}:${secondes}`;
 }
