@@ -85,4 +85,27 @@ function handleButtonPlay(){
 function openMusicFile(track){
     DISPLAY.playlistCurrent.textContent = track + 1;
     AUDIO.setAttribute('src', MUSICS_DATA[track].path);
+    updateMusicInfo(HOST_URL + MUSICS_DATA[track].path);
+}
+
+function updateMusicInfo(filePath){
+    jsmediatags.read(filePath, {
+        onSuccess: function(result){
+            const { data, format } = result.tags.picture;
+            let base64String = '';
+            for (let i = 0; i < data.length; i++) {
+                base64String += String.fromCharCode(data[i]);
+            }
+
+            DISPLAY.thumbs.setAttribute('src', `data:${data.format};base64,${window.btoa(base64String)}`);
+            DISPLAY.title.textContent = result.tags.title;
+            DISPLAY.artist.textContent = result.tags.artist;
+        },
+        onError: function(error){
+            console.log(error);
+            DISPLAY.thumbs.setAttribute('src', 'assets/cover-default.png');
+            DISPLAY.title.textContent = 'No title';
+            DISPLAY.artist.textContent = 'No artist';
+        }
+    });
 }
