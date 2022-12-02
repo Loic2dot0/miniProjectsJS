@@ -74,6 +74,7 @@ function handleButtonPlay(){
         AUDIO.play()
             .then(()=>{
                 CONTROLS.isPlay = true;
+                updateIconButtonPlay();
             })
             .catch(err=>{
                 console.log(err);
@@ -82,6 +83,16 @@ function handleButtonPlay(){
     } else {
         AUDIO.pause();
         CONTROLS.isPlay = false;
+        updateIconButtonPlay();
+    }
+}
+
+function updateIconButtonPlay(){
+    let btnIcon = document.querySelector('button[data-control="play"] img');
+    if(CONTROLS.isPlay){
+        btnIcon.setAttribute('src', 'assets/pause-icon.svg');
+    } else {
+        btnIcon.setAttribute('src', 'assets/play-icon.svg');
     }
 }
 
