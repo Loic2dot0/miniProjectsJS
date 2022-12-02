@@ -1,3 +1,5 @@
+const jsmediatags = window.jsmediatags;
+const HOST_URL = 'http://127.0.0.1:5500/music-player/';
 const MUSICS_DATA = [
     {title: '', artist: '', track: '', path: 'media/music-01.mp3'},
     {title: '', artist: '', track: '', path: 'media/music-02.mp3'},
