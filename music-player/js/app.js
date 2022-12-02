@@ -181,12 +181,16 @@ function updateIconButtonMute(){
 }
 
 function changeTrack(action){
-    if(action == 'prev'){
-        PLAYLIST.current--;
-        if(PLAYLIST.current < 0) PLAYLIST.current = PLAYLIST.total - 1; 
+    if(CONTROLS.isShuffle){
+        PLAYLIST.current = getRandomTrack(PLAYLIST.current);
     }
 
-    if(action == 'next' || action.type){
+    if(action == 'prev' && !CONTROLS.isShuffle){
+        PLAYLIST.current--;
+        if(PLAYLIST.current < 0) PLAYLIST.current = PLAYLIST.total - 1;
+    }
+
+    if((action == 'next' || action.type) && !CONTROLS.isShuffle){
         PLAYLIST.current++;
         if(PLAYLIST.current >= PLAYLIST.total) PLAYLIST.current = 0;
     }
@@ -204,4 +208,12 @@ function handleButtonShuffle(){
     } else {
         btnIcon.setAttribute('src', 'assets/shuffle-icon.svg');
     }
+}
+
+function getRandomTrack(currentTrack){
+    let newTrack;
+    do{
+        newTrack = Math.floor(Math.random() * PLAYLIST.total);
+    } while( newTrack == currentTrack);
+    return newTrack;
 }
