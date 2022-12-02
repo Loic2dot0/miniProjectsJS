@@ -34,6 +34,7 @@ const PLAYLIST = {
 window.addEventListener('load', initPlaylist);
 AUDIO.addEventListener('loadeddata', updateDurationTime);
 AUDIO.addEventListener('timeupdate', updateCurrentTime);
+AUDIO.addEventListener('ended', changeTrack);
 PROGRESS_BAR.addEventListener('click', audioNavigation);
 BUTTONS.forEach(button => button.addEventListener('click', handleButton));
 
@@ -186,7 +187,7 @@ function changeTrack(action){
         console.log(PLAYLIST);
     }
 
-    if(action == 'next'){
+    if(action == 'next' || action.type){
         PLAYLIST.current++;
         if(PLAYLIST.current >= PLAYLIST.total) PLAYLIST.current = 0;
         console.log(PLAYLIST);
