@@ -47,7 +47,7 @@ function handleButton(e){
     let btn = e.target.dataset.control;
     switch(btn){
         case 'shuffle':
-            console.log('shuffle');
+            handleButtonShuffle();
             break;
         case 'prev':
             changeTrack('prev');
@@ -184,16 +184,24 @@ function changeTrack(action){
     if(action == 'prev'){
         PLAYLIST.current--;
         if(PLAYLIST.current < 0) PLAYLIST.current = PLAYLIST.total - 1; 
-        console.log(PLAYLIST);
     }
 
     if(action == 'next' || action.type){
         PLAYLIST.current++;
         if(PLAYLIST.current >= PLAYLIST.total) PLAYLIST.current = 0;
-        console.log(PLAYLIST);
     }
 
     openMusicFile(PLAYLIST.current);
     CONTROLS.isPlay = false;
     handleButtonPlay();
+}
+
+function handleButtonShuffle(){
+    CONTROLS.isShuffle = !CONTROLS.isShuffle;
+    let btnIcon = document.querySelector('button[data-control="shuffle"] img');
+    if(CONTROLS.isShuffle){
+        btnIcon.setAttribute('src', 'assets/shuffle.svg');
+    } else {
+        btnIcon.setAttribute('src', 'assets/shuffle-icon.svg');
+    }
 }
