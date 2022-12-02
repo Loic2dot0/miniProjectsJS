@@ -49,13 +49,13 @@ function handleButton(e){
             console.log('shuffle');
             break;
         case 'prev':
-            console.log('prev');
+            changeTrack('prev');
             break;
         case 'play':
             handleButtonPlay();
             break;
         case 'next':
-            console.log('next');
+            changeTrack('next');
             break;
         case 'sound-down':
             changeVolume(btn);
@@ -177,4 +177,22 @@ function updateIconButtonMute(){
     } else {
         btnIcon.setAttribute('src', 'assets/unmute.svg');
     }
+}
+
+function changeTrack(action){
+    if(action == 'prev'){
+        PLAYLIST.current--;
+        if(PLAYLIST.current < 0) PLAYLIST.current = PLAYLIST.total - 1; 
+        console.log(PLAYLIST);
+    }
+
+    if(action == 'next'){
+        PLAYLIST.current++;
+        if(PLAYLIST.current >= PLAYLIST.total) PLAYLIST.current = 0;
+        console.log(PLAYLIST);
+    }
+
+    openMusicFile(PLAYLIST.current);
+    CONTROLS.isPlay = false;
+    handleButtonPlay();
 }
