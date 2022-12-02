@@ -19,9 +19,37 @@ const DISPLAY = {
     artist: document.querySelector('.artist'),
     playlistCurrent: document.querySelector('.playlist-current'),
     playlistTotal: document.querySelector('.playlist-total')
-}
+};
 const CONTROLS = {
     isPlay: false,
     isShuffle: false,
     isMute: false
+};
+
+BUTTONS.forEach(button => button.addEventListener('click', handleButton));
+
+function handleButton(e){
+    switch(e.target.dataset.control){
+        case 'shuffle':
+            console.log('shuffle');
+            break;
+        case 'prev':
+            console.log('prev');
+            break;
+        case 'play':
+            console.log('play');
+            break;
+        case 'next':
+            console.log('next');
+            break;
+        case 'sound-down':
+            console.log('sound-down');
+            break;
+        case 'sound-mute':
+            console.log('sound-mute');
+            break;
+        case 'sound-up':
+            console.log('sound-up');
+            break;
+    }
 }
