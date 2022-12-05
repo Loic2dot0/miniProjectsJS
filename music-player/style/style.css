@@ -52,15 +52,18 @@ main{
 
 .music-info{
     flex:1;
+    overflow: hidden;
 }
 
 .title{
     color: #fff;
     font-size: 1.5rem;
+    white-space: nowrap;
 }
 
 .artist{
     font-size: 1.2rem;
+    white-space: nowrap;
 }
 
 .controls{
