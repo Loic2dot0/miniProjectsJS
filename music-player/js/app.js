@@ -7,6 +7,9 @@ const MUSICS_DATA = [
     {title: '', artist: '', track: '', path: 'media/music-04.mp3'},
     {title: '', artist: '', track: '', path: 'media/music-05.mp3'},
     {title: '', artist: '', track: '', path: 'media/music-06.mp3'},
+    {title: '', artist: '', track: '', path: 'media/music-07.mp3'},
+    {title: '', artist: '', track: '', path: 'media/music-08.mp3'},
+    {title: '', artist: '', track: '', path: 'media/music-09.mp3'}
 ];
 const AUDIO = document.querySelector('audio');
 const BUTTONS = [...document.querySelectorAll('button')];
@@ -27,7 +30,7 @@ const CONTROLS = {
     isShuffle: false
 };
 const PLAYLIST = {
-    current: 0,
+    current: 6,
     total: MUSICS_DATA.length
 }
 
@@ -115,12 +118,14 @@ function updateMusicInfo(filePath){
             DISPLAY.thumbs.setAttribute('src', `data:${data.format};base64,${window.btoa(base64String)}`);
             DISPLAY.title.textContent = result.tags.title;
             DISPLAY.artist.textContent = result.tags.artist;
+            doAnimateInfo();
         },
         onError: function(error){
             console.log(error);
             DISPLAY.thumbs.setAttribute('src', 'assets/cover-default.png');
             DISPLAY.title.textContent = 'No title';
             DISPLAY.artist.textContent = 'No artist';
+            doAnimateInfo();
         }
     });
 }
@@ -216,4 +221,42 @@ function getRandomTrack(currentTrack){
         newTrack = Math.floor(Math.random() * PLAYLIST.total);
     } while( newTrack == currentTrack);
     return newTrack;
+}
+
+const ANIMATION = {
+    title: null,
+    artist: null,
+    translateTitle: 0,
+    translateArtist: 0
+}
+
+function doAnimateInfo(){
+    cancelAnimationFrame(ANIMATION.title);
+    cancelAnimationFrame(ANIMATION.artist);
+    DISPLAY.title.style.transform = `translateX(0px)`;
+    DISPLAY.artist.style.transform = `translateX(0px)`;
+    ANIMATION.translateTitle = 0;
+    ANIMATION.translateArtist = 0;
+    
+    if(DISPLAY.title.scrollWidth > document.querySelector('.music-info').getBoundingClientRect().width + 10){
+        requestAnimationFrame(animateTitle);
+    }
+
+    if(DISPLAY.artist.scrollWidth > document.querySelector('.music-info').getBoundingClientRect().width + 10){
+        requestAnimationFrame(animateArtist);
+    }
+}
+
+function animateTitle(){
+    DISPLAY.title.style.transform = `translateX(${ANIMATION.translateTitle}px)`;
+    ANIMATION.translateTitle--;
+    if(-ANIMATION.translateTitle > DISPLAY.title.scrollWidth) ANIMATION.translateTitle = document.querySelector('.music-info').getBoundingClientRect().width;
+    ANIMATION.title = requestAnimationFrame(animateTitle);
+}
+
+function animateArtist(){
+    DISPLAY.artist.style.transform = `translateX(${ANIMATION.translateArtist}px)`;
+    ANIMATION.translateArtist--;
+    if(-ANIMATION.translateArtist > DISPLAY.artist.scrollWidth + 20) ANIMATION.translateArtist = document.querySelector('.music-info').getBoundingClientRect().width;
+    ANIMATION.artist = requestAnimationFrame(animateArtist);
 }
