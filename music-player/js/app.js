@@ -6,10 +6,7 @@ const MUSICS_DATA = [
     {title: '', artist: '', track: '', path: 'media/music-03.mp3'},
     {title: '', artist: '', track: '', path: 'media/music-04.mp3'},
     {title: '', artist: '', track: '', path: 'media/music-05.mp3'},
-    {title: '', artist: '', track: '', path: 'media/music-06.mp3'},
-    {title: '', artist: '', track: '', path: 'media/music-07.mp3'},
-    {title: '', artist: '', track: '', path: 'media/music-08.mp3'},
-    {title: '', artist: '', track: '', path: 'media/music-09.mp3'}
+    {title: '', artist: '', track: '', path: 'media/music-06.mp3'}
 ];
 const AUDIO = document.querySelector('audio');
 const BUTTONS = [...document.querySelectorAll('button')];
@@ -30,7 +27,7 @@ const CONTROLS = {
     isShuffle: false
 };
 const PLAYLIST = {
-    current: 6,
+    current: 0,
     total: MUSICS_DATA.length
 }
 
@@ -109,15 +106,17 @@ function openMusicFile(track){
 function updateMusicInfo(filePath){
     jsmediatags.read(filePath, {
         onSuccess: function(result){
-            const { data, format } = result.tags.picture;
-            let base64String = '';
-            for (let i = 0; i < data.length; i++) {
-                base64String += String.fromCharCode(data[i]);
-            }
-
-            DISPLAY.thumbs.setAttribute('src', `data:${data.format};base64,${window.btoa(base64String)}`);
-            DISPLAY.title.textContent = result.tags.title;
-            DISPLAY.artist.textContent = result.tags.artist;
+            if(result.tags.picture){
+                const { data, format } = result.tags.picture;
+                let base64String = '';
+                for (let i = 0; i < data.length; i++) {
+                    base64String += String.fromCharCode(data[i]);
+                }
+                DISPLAY.thumbs.setAttribute('src', `data:${data.format};base64,${window.btoa(base64String)}`);
+            } else DISPLAY.thumbs.setAttribute('src', 'assets/cover-default.png');
+            
+            DISPLAY.title.textContent = result.tags.title ? result.tags.title : 'No title';
+            DISPLAY.artist.textContent = result.tags.artist ? result.tags.artist : 'No artist';
             doAnimateInfo();
         },
         onError: function(error){
