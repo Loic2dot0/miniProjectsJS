@@ -53,7 +53,6 @@ OBSERVER.observe(TARGET);
 
 function handleIntersect(entries){
     if(window.scrollY > window.innerHeight / 2 && entries[0].isIntersecting){
-        console.log('déclenchement');
         getAPIResult();
     }
 }
