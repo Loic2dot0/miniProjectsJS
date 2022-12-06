@@ -17,10 +17,19 @@ function getAPIResult(){
         })
         .then(res =>{
             if(res.length == 0) throw new Error('Désolé mais aucun chat n\'est disponible');
-            console.log(res);
+            handleResult(res);
         })
         .catch(err => {
             console.log(err.message);
             MESSAGE.textContent = err.message;
         });
+}
+
+function handleResult(results){
+    results.forEach(result => {
+        let newImg = document.createElement('img');
+        newImg.setAttribute('src', result.url);
+        newImg.setAttribute('alt', 'Une image de chat');
+        FLUX.appendChild(newImg);
+    });
 }
