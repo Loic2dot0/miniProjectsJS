@@ -4,6 +4,7 @@ const MESSAGE = document.querySelector('.message');
 const BUTTON = document.querySelector('.to-top');
 
 window.addEventListener('load', getAPIResult);
+BUTTON.addEventListener('click', scrollToTop);
 
 function getAPIResult(){
     MESSAGE.textContent = '';
@@ -32,4 +33,11 @@ function handleResult(results){
         newImg.setAttribute('alt', 'Une image de chat');
         FLUX.appendChild(newImg);
     });
+}
+
+function scrollToTop(){
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
 }
