@@ -41,3 +41,19 @@ function scrollToTop(){
         behavior: "smooth"
     })
 }
+
+const TARGET = document.querySelector('.scroll-marker');
+const OBSERVER = new IntersectionObserver(handleIntersect, {
+    root: null,
+    rootMargin: '50%',
+    threshold: 0
+});
+
+OBSERVER.observe(TARGET);
+
+function handleIntersect(entries){
+    if(window.scrollY > window.innerHeight / 2 && entries[0].isIntersecting){
+        console.log('déclenchement');
+        getAPIResult();
+    }
+}
