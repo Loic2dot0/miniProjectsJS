@@ -69,8 +69,29 @@ function getRandomDirection(){
 
 function animateParticles(){
     CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
-
+    
     particleArray.forEach(particle => particle.update());
-
+    
+    connectParticles();
     requestAnimationFrame(animateParticles);
+}
+
+function connectParticles(){
+    for(let i = 0; i < particleArray.length; i++){
+        for(let j = i + 1; j <particleArray.length; j++){
+            let squaredDistanceX = (particleArray[i].x - particleArray[j].x) * (particleArray[i].x - particleArray[j].x); 
+            let squaredDistanceY = (particleArray[i].y - particleArray[j].y) * (particleArray[i].y - particleArray[j].y);
+            let hypotenuse =  squaredDistanceX + squaredDistanceY;
+            let limit = 120 * 120;
+            if(hypotenuse < limit){
+                let opacity = 1 - hypotenuse / limit;
+                CTX.beginPath();
+                CTX.moveTo(particleArray[i].x, particleArray[i].y);
+                CTX.lineTo(particleArray[j].x, particleArray[j].y);
+                CTX.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                CTX.lineWidth = 0.5;
+                CTX.stroke();
+            }
+        }
+    }
 }
