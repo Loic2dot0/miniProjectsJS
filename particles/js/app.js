@@ -1,9 +1,6 @@
 const CANVAS = document.querySelector('canvas');
 const CTX = CANVAS.getContext('2d');
 
-CANVAS.width = window.innerWidth;
-CANVAS.height = window.innerHeight;
-
 class Particle {
     constructor(x, y, directionX, directionY, size, color){
         this.x = x,
@@ -36,8 +33,11 @@ class Particle {
 let particleArray;
 
 init();
+animateParticles();
 
 function init(){
+    CANVAS.width = window.innerWidth;
+    CANVAS.height = window.innerHeight;
     particleArray = [];
     let particlesNumber = CANVAS.width * CANVAS.height / 9000;
     let particleColor = '#fff';
@@ -63,4 +63,12 @@ function getRandomDirection(){
     } else {
         return -getRandomNumber(0.5, 1.5);
     }
+}
+
+function animateParticles(){
+    CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
+
+    particleArray.forEach(particle => particle.update());
+
+    requestAnimationFrame(animateParticles);
 }
