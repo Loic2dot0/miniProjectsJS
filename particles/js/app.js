@@ -35,6 +35,8 @@ let particleArray;
 init();
 animateParticles();
 
+window.addEventListener('resize', init);
+
 function init(){
     CANVAS.width = window.innerWidth;
     CANVAS.height = window.innerHeight;
