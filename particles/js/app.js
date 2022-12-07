@@ -43,12 +43,16 @@ function init(){
     let particleColor = '#fff';
 
     for(let i = 0; i < particlesNumber; i++){
-        let x;
-        let y;
+        let x = getrandomNumber(10, CANVAS.width - 10);
+        let y = getrandomNumber(10, CANVAS.height - 10);
         let directionX;
         let directionY;
-        let size;
+        let size = getrandomNumber(1, 3);
 
         particleArray.push(new Particle(x, y, directionX, directionY, size, particleColor));
     }  
+}
+
+function getrandomNumber(min, max){
+    return Math.random() * (max - min) + min;
 }
