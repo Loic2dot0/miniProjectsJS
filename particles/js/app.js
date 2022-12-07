@@ -43,16 +43,24 @@ function init(){
     let particleColor = '#fff';
 
     for(let i = 0; i < particlesNumber; i++){
-        let x = getrandomNumber(10, CANVAS.width - 10);
-        let y = getrandomNumber(10, CANVAS.height - 10);
-        let directionX;
-        let directionY;
-        let size = getrandomNumber(1, 3);
+        let x = getRandomNumber(10, CANVAS.width - 10);
+        let y = getRandomNumber(10, CANVAS.height - 10);
+        let directionX = getRandomDirection();
+        let directionY = getRandomDirection();
+        let size = getRandomNumber(1, 3);
 
         particleArray.push(new Particle(x, y, directionX, directionY, size, particleColor));
-    }  
+    }
 }
 
-function getrandomNumber(min, max){
+function getRandomNumber(min, max){
     return Math.random() * (max - min) + min;
+}
+
+function getRandomDirection(){
+    if(Math.floor(Math.random() * 2)){
+        return getRandomNumber(0.5, 1.5);
+    } else {
+        return -getRandomNumber(0.5, 1.5);
+    }
 }
