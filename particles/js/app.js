@@ -32,3 +32,23 @@ class Particle {
         this.draw();
     }
 }
+
+let particleArray;
+
+init();
+
+function init(){
+    particleArray = [];
+    let particlesNumber = CANVAS.width * CANVAS.height / 9000;
+    let particleColor = '#fff';
+
+    for(let i = 0; i < particlesNumber; i++){
+        let x;
+        let y;
+        let directionX;
+        let directionY;
+        let size;
+
+        particleArray.push(new Particle(x, y, directionX, directionY, size, particleColor));
+    }  
+}
