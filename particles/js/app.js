@@ -104,11 +104,16 @@ function connectParticles(){
 }
 
 window.addEventListener('mousemove', getCursorPosition);
+window.addEventListener('mouseout', handleCursorOut);
 
 function getCursorPosition(e){
     CURSOR.posX = e.clientX;
     CURSOR.posY = e.clientY;
     CURSOR.moveIn = true;
+}
+
+function handleCursorOut(){
+    CURSOR.moveIn = false;
 }
 
 function repulseParticle(){
