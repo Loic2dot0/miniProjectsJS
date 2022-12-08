@@ -31,6 +31,12 @@ class Particle {
 }
 
 let particleArray;
+const CURSOR = {
+    posX: 0,
+    posY: 0,
+    repulseRadius: 100,
+    moveIn: false
+}
 
 init();
 animateParticles();
@@ -94,4 +100,12 @@ function connectParticles(){
             }
         }
     }
+}
+
+window.addEventListener('mousemove', getCursorPosition);
+
+function getCursorPosition(e){
+    CURSOR.posX = e.clientX;
+    CURSOR.posY = e.clientY;
+    CURSOR.moveIn = true;
 }
