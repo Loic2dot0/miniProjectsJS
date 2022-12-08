@@ -78,6 +78,7 @@ function animateParticles(){
     
     particleArray.forEach(particle => particle.update());
     
+    CURSOR.moveIn && repulseParticle();
     connectParticles();
     requestAnimationFrame(animateParticles);
 }
@@ -108,4 +109,25 @@ function getCursorPosition(e){
     CURSOR.posX = e.clientX;
     CURSOR.posY = e.clientY;
     CURSOR.moveIn = true;
+}
+
+function repulseParticle(){
+    particleArray.forEach(particle => {
+        let cursorDistX = particle.x - CURSOR.posX;
+        let cursorDistY = particle.y - CURSOR.posY;
+        let squaredCursorDist = cursorDistX * cursorDistX + cursorDistY * cursorDistY;
+        let squaredCursorRadius = CURSOR.repulseRadius * CURSOR.repulseRadius;
+        
+        if(squaredCursorDist < squaredCursorRadius){
+            let cursorDist = Math.sqrt(squaredCursorDist);
+            let velocity = 100;
+            let repulsefactor = (1 / CURSOR.repulseRadius) * (-1 * Math.pow(cursorDist / CURSOR.repulseRadius, 2)+1)* CURSOR.repulseRadius * velocity; 
+            
+            let vectX = cursorDistX / cursorDist;
+            let vectY = cursorDistY / cursorDist;
+
+            particle.x += vectX * repulsefactor;
+            particle.y += vectY * repulsefactor;
+        }
+    });
 }
