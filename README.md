@@ -18,3 +18,6 @@ Un lecteur audio avec des contrôles personnalisés en javaScript (lecture/pause
 
 ## ♾️ Infinite Scroll
 Une application intégrant un système de "scroll infini".
+
+## ⚛️ Particles
+Une animation de "particules" incluant l'évitement du curseur de la souris.
