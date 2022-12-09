@@ -6,8 +6,8 @@ const DISPLAY = {
 const BTN_PLAY = document.querySelector('.btn-play');
 const BTN_RESET = document.querySelector('.btn-reset');
 const TIMER_INIT = {
-    work: 1800, //1800s = 30minutes
-    rest: 300, //300s = 5minutes
+    work: 10, //1800s = 30minutes
+    rest: 10, //300s = 5minutes
     timerID: null,
 }
 const COUNTER = {
@@ -58,5 +58,20 @@ function toggleIconPlayBTN(){
 }
 
 function handlePomodoro(){
-   
+    if(!play) return;
+
+    if(COUNTER.work > 0){
+        COUNTER.work--;
+        DISPLAY.workCounter.textContent = convertSecondesToHHMMSS(COUNTER.work);
+    } else if(COUNTER.rest > 0){
+        COUNTER.rest--;
+        DISPLAY.restCounter.textContent = convertSecondesToHHMMSS(COUNTER.rest);
+    } else {
+        COUNTER.work = TIMER_INIT.work - 1;
+        COUNTER.rest = TIMER_INIT.rest;
+        DISPLAY.workCounter.textContent = convertSecondesToHHMMSS(COUNTER.work);
+        DISPLAY.restCounter.textContent = convertSecondesToHHMMSS(COUNTER.rest);
+        COUNTER.cycle++;
+        DISPLAY.cycleCounter.textContent = `Cycle(s): ${COUNTER.cycle}`;
+    }
 }
