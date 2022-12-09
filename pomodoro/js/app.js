@@ -6,8 +6,8 @@ const DISPLAY = {
 const BTN_PLAY = document.querySelector('.btn-play');
 const BTN_RESET = document.querySelector('.btn-reset');
 const TIMER_INIT = {
-    work: 10, //1800s = 30minutes
-    rest: 10, //300s = 5minutes
+    work: 1800, //1800s = 30minutes
+    rest: 300, //300s = 5minutes
     timerID: null,
 }
 const COUNTER = {
@@ -28,9 +28,11 @@ function init(){
     startedTimer = false;
     clearInterval(TIMER_INIT.timerID);
     toggleIconPlayBTN();
+    document.querySelector('.timer.work').classList.remove('active');
+    document.querySelector('.timer.rest').classList.remove('active');
     DISPLAY.workCounter.textContent = convertSecondesToHHMMSS(COUNTER.work);
     DISPLAY.restCounter.textContent = convertSecondesToHHMMSS(COUNTER.rest);
-    DISPLAY.cycleCounter.textContent = `Cycle(s): ${COUNTER.cycle}`;
+    DISPLAY.cycleCounter.textContent = `Cycle : ${COUNTER.cycle}`;
 }
 
 function convertSecondesToHHMMSS(timeInSecondes){
@@ -66,15 +68,21 @@ function handlePomodoro(){
     if(COUNTER.work > 0){
         COUNTER.work--;
         DISPLAY.workCounter.textContent = convertSecondesToHHMMSS(COUNTER.work);
+        document.querySelector('.timer.work').classList.add('active');
     } else if(COUNTER.rest > 0){
         COUNTER.rest--;
         DISPLAY.restCounter.textContent = convertSecondesToHHMMSS(COUNTER.rest);
+        document.querySelector('.timer.work').classList.remove('active');
+        document.querySelector('.timer.rest').classList.add('active');
     } else {
         COUNTER.work = TIMER_INIT.work - 1;
         COUNTER.rest = TIMER_INIT.rest;
         DISPLAY.workCounter.textContent = convertSecondesToHHMMSS(COUNTER.work);
         DISPLAY.restCounter.textContent = convertSecondesToHHMMSS(COUNTER.rest);
         COUNTER.cycle++;
-        DISPLAY.cycleCounter.textContent = `Cycle(s): ${COUNTER.cycle}`;
+        DISPLAY.cycleCounter.textContent = COUNTER.cycle > 1 ? `Cycles : ${COUNTER.cycle}` : `Cycle : ${COUNTER.cycle}`;
+        document.querySelector('.timer.work').classList.add('active');
+        document.querySelector('.timer.rest').classList.remove('active');
+
     }
 }
