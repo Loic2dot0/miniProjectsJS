@@ -21,3 +21,6 @@ Une application intégrant un système de "scroll infini".
 
 ## ⚛️ Particles
 Une animation de "particules" incluant l'évitement du curseur de la souris.
+
+## 🍅 Pomodoro
+Une application de minuteurs pour la technique "Pomodoro".
