@@ -7,7 +7,8 @@ const BTN_PLAY = document.querySelector('.btn-play');
 const BTN_RESET = document.querySelector('.btn-reset');
 const TIMER_INIT = {
     work: 1800, //1800s = 30minutes
-    rest: 300 //300s = 5minutes
+    rest: 300, //300s = 5minutes
+    timerID: null,
 }
 const COUNTER = {
     work: 0,  
@@ -15,6 +16,7 @@ const COUNTER = {
     cycle: 0
 }
 let play = false;
+let startedTimer = false;
 
 init();
 
@@ -37,4 +39,24 @@ function convertSecondesToHHMMSS(timeInSecondes){
     if(minutes < 10 && hours > 0) minutes = `0${minutes}`;
     if(secondes < 10) secondes = `0${secondes}`;
     return hours == 0 ? `${minutes}:${secondes}` : `${hours}:${minutes}:${secondes}`;
+}
+
+BTN_PLAY.addEventListener('click', handlePlayBTN);
+
+function handlePlayBTN(){
+    play = !play;
+    toggleIconPlayBTN();
+
+    if(startedTimer) return;
+    startedTimer = true;
+    TIMER_INIT.timerID = setInterval(handlePomodoro, 1000);
+}
+
+function toggleIconPlayBTN(){
+    let icon = play ? 'assets/pause.svg' : 'assets/play.svg';
+    document.querySelector('.btn-play img').setAttribute('src', icon);
+}
+
+function handlePomodoro(){
+   
 }
