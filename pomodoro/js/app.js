@@ -25,7 +25,9 @@ function init(){
     COUNTER.rest = TIMER_INIT.rest;
     COUNTER.cycle = 0;
     play = false;
-
+    startedTimer = false;
+    clearInterval(TIMER_INIT.timerID);
+    toggleIconPlayBTN();
     DISPLAY.workCounter.textContent = convertSecondesToHHMMSS(COUNTER.work);
     DISPLAY.restCounter.textContent = convertSecondesToHHMMSS(COUNTER.rest);
     DISPLAY.cycleCounter.textContent = `Cycle(s): ${COUNTER.cycle}`;
@@ -42,6 +44,7 @@ function convertSecondesToHHMMSS(timeInSecondes){
 }
 
 BTN_PLAY.addEventListener('click', handlePlayBTN);
+BTN_RESET.addEventListener('click', init);
 
 function handlePlayBTN(){
     play = !play;
