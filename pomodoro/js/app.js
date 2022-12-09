@@ -24,7 +24,17 @@ function init(){
     COUNTER.cycle = 0;
     play = false;
 
-    DISPLAY.workCounter.textContent = COUNTER.work;
-    DISPLAY.restCounter.textContent = COUNTER.rest;
-    DISPLAY.cycle.textContent = COUNTER.cycle;
+    DISPLAY.workCounter.textContent = convertSecondesToHHMMSS(COUNTER.work);
+    DISPLAY.restCounter.textContent = convertSecondesToHHMMSS(COUNTER.rest);
+    DISPLAY.cycleCounter.textContent = `Cycle(s): ${COUNTER.cycle}`;
+}
+
+function convertSecondesToHHMMSS(timeInSecondes){
+    let hours = Math.floor(timeInSecondes / 3600);
+    let minutes = Math.floor((timeInSecondes - hours * 3600)/ 60);
+    let secondes = Math.floor(timeInSecondes - hours * 3600 - minutes * 60);
+    
+    if(minutes < 10 && hours > 0) minutes = `0${minutes}`;
+    if(secondes < 10) secondes = `0${secondes}`;
+    return hours == 0 ? `${minutes}:${secondes}` : `${hours}:${minutes}:${secondes}`;
 }
