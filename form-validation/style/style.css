@@ -49,10 +49,26 @@ label{
     font-weight: 600;
 }
 
+.input-container{
+    position: relative;
+    padding-bottom: 5px;
+    border-bottom: solid 2px var(--primary-color);
+}
+
+.validation-icon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2rem;
+    display: none;
+}
+
 input{
+    width: 100%;
     line-height: 2rem;
     font-size: 1rem;
     border: none;
+    background-color: transparent;
 }
 
 .error-message{
