@@ -47,7 +47,7 @@ INPUTS.forEach((input, indexInput) => {
                 verifyInputMail(input.value, indexInput);
                 break;
             case 2 :
-                //verifyInputPassword(input.value, indexInput);
+                verifyInputPassword(input.value, indexInput);
                 break;
             case 3 :
                 //verifyInputPasswordConfirm(input.value, indexInput);
@@ -67,4 +67,23 @@ function verifyInputMail(mailValue, indexInput){
     INPUTS_VALIDITY.mail = mailFormat.test(mailValue);
     ERROR_MESSAGES[indexInput].textContent = INPUTS_VALIDITY.mail ? '' : 'Entrez un email valide.'
     showValidation(indexInput, INPUTS_VALIDITY.mail);
+}
+
+function verifyInputPassword(passwordValue, indexInput){
+    let passwordCondition = [];
+    passwordCondition.push(new RegExp("[a-z]").test(passwordValue));
+    passwordCondition.push(new RegExp("[A-Z]").test(passwordValue));
+    passwordCondition.push(new RegExp("[0-9]").test(passwordValue));
+    passwordCondition.push(new RegExp("[^a-zA-Z0-9]").test(passwordValue));
+    passwordCondition.push(passwordValue.length >= 6 ? true : false);
+
+    let failedCondition = passwordCondition.filter(condition => !condition);
+    
+    if(failedCondition.length){
+        INPUTS_VALIDITY.password = false;
+    } else {
+        INPUTS_VALIDITY.password = true;
+        ERROR_MESSAGES[indexInput].textContent = '';
+    }
+    showValidation(indexInput, INPUTS_VALIDITY.password);
 }
