@@ -81,9 +81,24 @@ function verifyInputPassword(passwordValue, indexInput){
     
     if(failedCondition.length){
         INPUTS_VALIDITY.password = false;
+        showPasswordStrength(0);
     } else {
         INPUTS_VALIDITY.password = true;
         ERROR_MESSAGES[indexInput].textContent = '';
+        showPasswordStrength(passwordValue.length);
     }
     showValidation(indexInput, INPUTS_VALIDITY.password);
+}
+
+function showPasswordStrength(passwordLength){
+    let passwordStatut = document.querySelectorAll('.password-statut span');
+    
+    if(passwordLength == 0) {
+        passwordStatut.forEach(statut => statut.style.display = 'none');
+        return;
+    }
+    // <=8 faible,  <= 12 moyen, > 12 fort
+    passwordStatut[0].style.display = 'initial';
+    if(passwordLength > 8) passwordStatut[1].style.display = 'initial';
+    if(passwordLength > 12) passwordStatut[2].style.display = 'initial';
 }
