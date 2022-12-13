@@ -25,7 +25,7 @@ function handleForm(e){
     }
 }
 
-function showValidation({index, validation}){
+function showValidation(index, validation){
     if(validation){
         VALIDATION_ICONS[index].setAttribute('src', 'assets/check.svg');
         VALIDATION_ICONS[index].style.display = 'initial';
@@ -41,7 +41,7 @@ INPUTS.forEach((input, indexInput) => {
     input.addEventListener('input', () => {
         switch(indexInput){
             case 0 :
-                //verifyInputUser(input.value, indexInput);
+                verifyInputUser(input.value, indexInput);
                 break;
             case 1 :
                 //verifyInputMail(input.value, indexInput);
@@ -55,3 +55,9 @@ INPUTS.forEach((input, indexInput) => {
         }
     });
 });
+
+function verifyInputUser(value, indexInput){
+    INPUTS_VALIDITY.user = value.length < 3 ? false : true;
+    ERROR_MESSAGES[indexInput].textContent = INPUTS_VALIDITY.user ? '' : 'Votre nom doit contenir au moins 3 caractères.'
+    showValidation(indexInput, INPUTS_VALIDITY.user);
+}
