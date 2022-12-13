@@ -8,3 +8,19 @@ const INPUTS_VALIDITY = {
     password: false,
     passwordConfirm: false
 };
+
+FORM.addEventListener('submit', handleForm);
+
+function handleForm(e){
+    e.preventDefault();
+    
+    let keysInputValididy = Object.keys(INPUTS_VALIDITY);
+    let failedInputs = keysInputValididy.filter(key => !INPUTS_VALIDITY[key]);
+    
+    if(failedInputs.length){
+        //traitement des inputs incorrects
+    } else {
+        FORM.reset();
+        alert('Formulaire validé !');
+    }
+}
