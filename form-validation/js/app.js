@@ -44,7 +44,7 @@ INPUTS.forEach((input, indexInput) => {
                 verifyInputUser(input.value, indexInput);
                 break;
             case 1 :
-                //verifyInputMail(input.value, indexInput);
+                verifyInputMail(input.value, indexInput);
                 break;
             case 2 :
                 //verifyInputPassword(input.value, indexInput);
@@ -56,8 +56,15 @@ INPUTS.forEach((input, indexInput) => {
     });
 });
 
-function verifyInputUser(value, indexInput){
-    INPUTS_VALIDITY.user = value.length < 3 ? false : true;
-    ERROR_MESSAGES[indexInput].textContent = INPUTS_VALIDITY.user ? '' : 'Votre nom doit contenir au moins 3 caractères.'
+function verifyInputUser(userValue, indexInput){
+    INPUTS_VALIDITY.user = userValue.length < 3 ? false : true;
+    ERROR_MESSAGES[indexInput].textContent = INPUTS_VALIDITY.user ? '' : 'Votre nom doit contenir au moins 3 caractères.';
     showValidation(indexInput, INPUTS_VALIDITY.user);
+}
+
+function verifyInputMail(mailValue, indexInput){
+    let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
+    INPUTS_VALIDITY.mail = mailFormat.test(mailValue);
+    ERROR_MESSAGES[indexInput].textContent = INPUTS_VALIDITY.mail ? '' : 'Entrez un email valide.'
+    showValidation(indexInput, INPUTS_VALIDITY.mail);
 }
