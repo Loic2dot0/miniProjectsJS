@@ -36,3 +36,22 @@ function showValidation({index, validation}){
         ERROR_MESSAGES[index].style.display = 'initial';
     }
 }
+
+INPUTS.forEach((input, indexInput) => {
+    input.addEventListener('input', () => {
+        switch(indexInput){
+            case 0 :
+                //verifyInputUser(input.value, indexInput);
+                break;
+            case 1 :
+                //verifyInputMail(input.value, indexInput);
+                break;
+            case 2 :
+                //verifyInputPassword(input.value, indexInput);
+                break;
+            case 3 :
+                //verifyInputPasswordConfirm(input.value, indexInput);
+                break;    
+        }
+    });
+});
