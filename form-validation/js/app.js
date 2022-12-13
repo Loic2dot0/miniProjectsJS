@@ -24,3 +24,15 @@ function handleForm(e){
         alert('Formulaire validé !');
     }
 }
+
+function showValidation({index, validation}){
+    if(validation){
+        VALIDATION_ICONS[index].setAttribute('src', 'assets/check.svg');
+        VALIDATION_ICONS[index].style.display = 'initial';
+        ERROR_MESSAGES[index].style.display = 'none';
+    } else {
+        VALIDATION_ICONS[index].setAttribute('src', 'assets/error.svg');
+        VALIDATION_ICONS[index].style.display = 'initial';
+        ERROR_MESSAGES[index].style.display = 'initial';
+    }
+}
