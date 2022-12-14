@@ -8,11 +8,13 @@ const INPUTS_VALIDITY = {
     password: false,
     passwordConfirm: false
 };
+let isAnimate = false
 
 FORM.addEventListener('submit', handleForm);
 
 function handleForm(e){
     e.preventDefault();
+    if(isAnimate) return;
     
     let keysInputValididy = Object.keys(INPUTS_VALIDITY);
     let failedInputs = keysInputValididy.filter(key => !INPUTS_VALIDITY[key]);
@@ -21,6 +23,12 @@ function handleForm(e){
         INPUTS.forEach((input, index) => {
             identifyInput(index);
         });
+        isAnimate = true;
+        document.querySelector('main').classList.add('shake');
+        setTimeout(()=>{
+            isAnimate = false;
+            document.querySelector('main').classList.remove('shake');
+        }, 400)
     } else {
         resetForm();
         alert('Formulaire validé !');
