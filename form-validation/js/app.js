@@ -18,7 +18,9 @@ function handleForm(e){
     let failedInputs = keysInputValididy.filter(key => !INPUTS_VALIDITY[key]);
     
     if(failedInputs.length){
-        //traitement des inputs incorrects
+        INPUTS.forEach((input, index) => {
+            identifyInput(index);
+        });
     } else {
         FORM.reset();
         alert('Formulaire validé !');
