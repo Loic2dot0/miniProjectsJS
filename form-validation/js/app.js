@@ -81,6 +81,7 @@ function verifyInputPassword(passwordValue, indexInput){
     
     if(failedCondition.length){
         INPUTS_VALIDITY.password = false;
+        ERROR_MESSAGES[indexInput].textContent = showRequiredElements(passwordCondition);
         showPasswordStrength(0);
     } else {
         INPUTS_VALIDITY.password = true;
@@ -97,8 +98,25 @@ function showPasswordStrength(passwordLength){
         passwordStatut.forEach(statut => statut.style.display = 'none');
         return;
     }
-    // <=8 faible,  <= 12 moyen, > 12 fort
+    // <= 8 faible,  <= 12 moyen, > 12 fort
     passwordStatut[0].style.display = 'initial';
     if(passwordLength > 8) passwordStatut[1].style.display = 'initial';
     if(passwordLength > 12) passwordStatut[2].style.display = 'initial';
+}
+
+function showRequiredElements(passwordCondition){
+    let require = [];
+    if(!passwordCondition[0]) require.push('minuscule');
+    if(!passwordCondition[1]) require.push('majuscule');
+    if(!passwordCondition[2]) require.push('chiffre');
+    if(!passwordCondition[3]) require.push('symbole');
+    if(!passwordCondition[4]) require.push('6 caractères minimum');
+
+    let requireMessage = 'Manque : ';
+
+    for(let i = 0; i < require.length; i++){
+        requireMessage += require[i];
+        requireMessage += i != require.length - 1 ? ', ' : '.';
+    }
+    return requireMessage;
 }
