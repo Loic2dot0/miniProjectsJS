@@ -22,7 +22,7 @@ function handleForm(e){
             identifyInput(index);
         });
     } else {
-        FORM.reset();
+        resetForm();
         alert('Formulaire validé !');
     }
 }
@@ -136,4 +136,15 @@ function verifyInputPasswordConfirm(indexInput){
         message = 'Confirmation du mot de passe incorrecte.';
     }
     showValidation(indexInput, INPUTS_VALIDITY.passwordConfirm, message);
+}
+
+function resetForm(){
+    FORM.reset();
+    for(props in INPUTS_VALIDITY){
+        INPUTS_VALIDITY[props] = false;
+    }
+    for(let i = 0; i < INPUTS.length; i++){
+        VALIDATION_ICONS[i].style.display = 'none';
+        ERROR_MESSAGES[i].textContent = '';
+    }    
 }
