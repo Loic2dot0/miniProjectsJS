@@ -50,7 +50,7 @@ INPUTS.forEach((input, indexInput) => {
                 verifyInputPassword(input.value, indexInput);
                 break;
             case 3 :
-                //verifyInputPasswordConfirm(input.value, indexInput);
+                verifyInputPasswordConfirm(input.value, indexInput);
                 break;    
         }
     });
@@ -119,4 +119,16 @@ function showRequiredElements(passwordCondition){
         requireMessage += i != require.length - 1 ? ', ' : '.';
     }
     return requireMessage;
+}
+
+function verifyInputPasswordConfirm(passwordConfirmValue, indexInput){
+    if(passwordConfirmValue != '' && passwordConfirmValue == INPUTS[indexInput - 1].value){
+        INPUTS_VALIDITY.passwordConfirm = true;
+        ERROR_MESSAGES[indexInput].textContent = '';
+        console.log(ERROR_MESSAGES[indexInput]);
+    } else {
+        INPUTS_VALIDITY.passwordConfirm = false;
+        ERROR_MESSAGES[indexInput].textContent = 'Confirmation du mot de passe incorrecte.';
+    }
+    showValidation(indexInput, INPUTS_VALIDITY.passwordConfirm);
 }
