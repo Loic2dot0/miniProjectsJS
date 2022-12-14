@@ -92,6 +92,7 @@ function verifyInputPassword(indexInput){
         showPasswordStrength(passwordValue.length);
     }
     showValidation(indexInput, INPUTS_VALIDITY.password, message);
+    if(INPUTS[indexInput + 1].value != '') verifyInputPasswordConfirm(indexInput + 1);
 }
 
 function showPasswordStrength(passwordLength){
