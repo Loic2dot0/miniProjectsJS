@@ -67,7 +67,6 @@ label{
 .input-container{
     position: relative;
     padding-bottom: 5px;
-    border-bottom: solid 2px var(--primary-color);
 }
 
 .validation-icon{
@@ -80,10 +79,18 @@ label{
 
 input{
     width: 100%;
+    padding: 2px;
     line-height: 2rem;
     font-size: 1rem;
     border: none;
     background-color: transparent;
+    border-bottom: solid 2px var(--primary-color);
+    color: var(--primary-color)
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 2px 0px var(--primary-color);
 }
 
 .error-message{
@@ -129,7 +136,7 @@ button{
     transition: all 400ms;
 }
 
-button:hover{
+button:hover, button:focus{
     background-color: var(--secondary-color);
     color: var(--primary-color);
     outline: solid 1px var(--primary-color);
