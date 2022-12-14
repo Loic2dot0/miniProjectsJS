@@ -55,20 +55,22 @@ function identifyInput(e){
     }
 }
 
-function verifyInputUser(userValue, indexInput){
+function verifyInputUser(indexInput){
+    let userValue = INPUTS[indexInput].value;
     INPUTS_VALIDITY.user = userValue.length < 3 ? false : true;
     let message = INPUTS_VALIDITY.user ? '' : 'Votre nom doit contenir au moins 3 caractères.';
     showValidation(indexInput, INPUTS_VALIDITY.user, message);
 }
 
-function verifyInputMail(mailValue, indexInput){
+function verifyInputMail(indexInput){
     let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
-    INPUTS_VALIDITY.mail = mailFormat.test(mailValue);
+    INPUTS_VALIDITY.mail = mailFormat.test(INPUTS[indexInput].value);
     let message = INPUTS_VALIDITY.mail ? '' : 'Entrez un email valide.'
     showValidation(indexInput, INPUTS_VALIDITY.mail, message);
 }
 
-function verifyInputPassword(passwordValue, indexInput){
+function verifyInputPassword(indexInput){
+    let passwordValue = INPUTS[indexInput].value;
     let passwordCondition = [];
     passwordCondition.push(new RegExp("[a-z]").test(passwordValue));
     passwordCondition.push(new RegExp("[A-Z]").test(passwordValue));
@@ -120,9 +122,11 @@ function showRequiredElements(passwordCondition){
     return requireMessage;
 }
 
-function verifyInputPasswordConfirm(passwordConfirmValue, indexInput){
+function verifyInputPasswordConfirm(indexInput){
+    let passwordConfirmValue = INPUTS[indexInput].value;
+    let passwordValue = INPUTS[indexInput -1].value;
     let message = '';
-    if(passwordConfirmValue != '' && passwordConfirmValue == INPUTS[indexInput - 1].value){
+    if(passwordConfirmValue != '' && passwordConfirmValue == passwordValue){
         INPUTS_VALIDITY.passwordConfirm = true;
     } else {
         INPUTS_VALIDITY.passwordConfirm = false;
