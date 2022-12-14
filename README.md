@@ -24,3 +24,6 @@ Une animation de "particules" incluant l'évitement du curseur de la souris.
 
 ## 🍅 Pomodoro
 Une application de minuteurs pour la technique "Pomodoro".
+
+## ✅ Form Validation
+Un formulaire avec vérification des champs coté "Front" en JavaScript.
