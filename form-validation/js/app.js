@@ -25,16 +25,11 @@ function handleForm(e){
     }
 }
 
-function showValidation(index, validation){
-    if(validation){
-        VALIDATION_ICONS[index].setAttribute('src', 'assets/check.svg');
-        VALIDATION_ICONS[index].style.display = 'initial';
-        ERROR_MESSAGES[index].style.display = 'none';
-    } else {
-        VALIDATION_ICONS[index].setAttribute('src', 'assets/error.svg');
-        VALIDATION_ICONS[index].style.display = 'initial';
-        ERROR_MESSAGES[index].style.display = 'initial';
-    }
+function showValidation(index, validation, message){
+    let icon = validation ? 'assets/check.svg' : 'assets/error.svg';
+    VALIDATION_ICONS[index].setAttribute('src', icon);
+    VALIDATION_ICONS[index].style.display = 'initial';
+    ERROR_MESSAGES[index].textContent = message;
 }
 
 INPUTS.forEach((input, indexInput) => {
@@ -58,15 +53,15 @@ INPUTS.forEach((input, indexInput) => {
 
 function verifyInputUser(userValue, indexInput){
     INPUTS_VALIDITY.user = userValue.length < 3 ? false : true;
-    ERROR_MESSAGES[indexInput].textContent = INPUTS_VALIDITY.user ? '' : 'Votre nom doit contenir au moins 3 caractères.';
-    showValidation(indexInput, INPUTS_VALIDITY.user);
+    let message = INPUTS_VALIDITY.user ? '' : 'Votre nom doit contenir au moins 3 caractères.';
+    showValidation(indexInput, INPUTS_VALIDITY.user, message);
 }
 
 function verifyInputMail(mailValue, indexInput){
     let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
     INPUTS_VALIDITY.mail = mailFormat.test(mailValue);
-    ERROR_MESSAGES[indexInput].textContent = INPUTS_VALIDITY.mail ? '' : 'Entrez un email valide.'
-    showValidation(indexInput, INPUTS_VALIDITY.mail);
+    let message = INPUTS_VALIDITY.mail ? '' : 'Entrez un email valide.'
+    showValidation(indexInput, INPUTS_VALIDITY.mail, message);
 }
 
 function verifyInputPassword(passwordValue, indexInput){
@@ -78,17 +73,17 @@ function verifyInputPassword(passwordValue, indexInput){
     passwordCondition.push(passwordValue.length >= 6 ? true : false);
 
     let failedCondition = passwordCondition.filter(condition => !condition);
-    
+    let message = '';
+
     if(failedCondition.length){
         INPUTS_VALIDITY.password = false;
-        ERROR_MESSAGES[indexInput].textContent = showRequiredElements(passwordCondition);
+        message = showRequiredElements(passwordCondition);
         showPasswordStrength(0);
     } else {
         INPUTS_VALIDITY.password = true;
-        ERROR_MESSAGES[indexInput].textContent = '';
         showPasswordStrength(passwordValue.length);
     }
-    showValidation(indexInput, INPUTS_VALIDITY.password);
+    showValidation(indexInput, INPUTS_VALIDITY.password, message);
 }
 
 function showPasswordStrength(passwordLength){
@@ -122,13 +117,12 @@ function showRequiredElements(passwordCondition){
 }
 
 function verifyInputPasswordConfirm(passwordConfirmValue, indexInput){
+    let message = '';
     if(passwordConfirmValue != '' && passwordConfirmValue == INPUTS[indexInput - 1].value){
         INPUTS_VALIDITY.passwordConfirm = true;
-        ERROR_MESSAGES[indexInput].textContent = '';
-        console.log(ERROR_MESSAGES[indexInput]);
     } else {
         INPUTS_VALIDITY.passwordConfirm = false;
-        ERROR_MESSAGES[indexInput].textContent = 'Confirmation du mot de passe incorrecte.';
+        message = 'Confirmation du mot de passe incorrecte.';
     }
-    showValidation(indexInput, INPUTS_VALIDITY.passwordConfirm);
+    showValidation(indexInput, INPUTS_VALIDITY.passwordConfirm, message);
 }
